@@ -59,7 +59,7 @@ void draw() {
           enemy[u][1]=(float)(height/2+height*Math.cos(h));
           enemy[u][2]=(float)(0-Math.sin(h)*height/360);
           enemy[u][3]=(float)(0-Math.cos(h)*height/360);
-          enemy[u][4]=random(entim+5, entim+10);
+          enemy[u][4]=random(entim+5, entim+20);
           scr++;
           if(scr>highscore)highscore=scr;
         }
