@@ -6,14 +6,15 @@ class enemy {
     x=width/2+cos(angle)*dist;
     y=height/2-sin(angle)*dist;
     speed=random(2, 4);
-    respawn_time=random(i*10, i*20);
+    respawn_time=random(i*100, i*200);
   }
   void rush() {
     if (respawn_time<=0) {
+      if((dist-dist%10)%20==0)angle+=0.01;
+      else angle -=0.01;
       dist-=speed;
       x=width/2+cos(angle)*dist;
       y=height/2-sin(angle)*dist;
-      strokeWeight(1);
       ellipse(x, y, 20, 20);
     } else respawn_time--;
   }
@@ -42,4 +43,30 @@ class bullet {
     x=-1;
     y=-1;
   }
+}
+
+float joystick_angle(){
+  float x,y,angle;
+  x=mouseX-width*0.75;
+  y=height*0.75-mouseY;
+  angle=asin(y/sqrt(x*x+y*y));
+  if (x>0) return angle;
+  else return -angle+PI;
+}
+
+class score{
+ int present,high;
+ void show(){
+   fill(0);
+   textAlign(CENTER, TOP);
+   text(present+"/"+high, width/2, 10);
+ }
+ void show_gameover(){
+    fill(255);
+    textAlign(CENTER, TOP);
+    if (present==high) text("New Best: "+ present, width/2, 10);
+    else text("Score: "+present+" High: "+high, width/2, 10);
+    textAlign(CENTER);
+    text("Restart", width/2, height/2);
+ }
 }
